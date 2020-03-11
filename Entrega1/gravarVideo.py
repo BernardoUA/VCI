@@ -9,7 +9,7 @@ while cap.isOpened():
     if not ret:
         print("Can't receive frame (stream end?). Exiting ...")
         break
-    frame = cv.flip(frame, 0)
+    #frame = cv.flip(frame, 0)
     # write the flipped frame
     out.write(frame)
     cv.imshow('frame', frame)
