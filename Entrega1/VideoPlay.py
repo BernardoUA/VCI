@@ -1,7 +1,7 @@
 import numpy as np
 import cv2 as cv 
 
-cap = cv.VideoCapture('video-1583312482.mp4')
+cap = cv.VideoCapture('output.avi')
 
 while cap.isOpened():
     # Capture frame-by-frame
@@ -11,9 +11,9 @@ while cap.isOpened():
         print("Can't receive frame (stream end?). Exiting ...")
         break
     # Our operations on the frame come here
-    gray = cv.cvtColor(frame, cv.COLOR_BGR2GRAY)
+    #gray = cv.cvtColor(frame, cv.COLOR_BGR2GRAY)
     # Display the resulting frame
-    cv.imshow('frame', gray)
+    cv.imshow('frame', frame)
     if cv.waitKey(25) == ord('q'):
         break
 # When everything done, release the capture
