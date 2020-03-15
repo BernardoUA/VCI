@@ -1,3 +1,5 @@
+# Com este programa queria tentar mexer na trackBar e mudar as cores da imagem
+
 import numpy as np
 import cv2 as cv
 def nothing(x):
@@ -9,8 +11,9 @@ def nothing(x):
 # cv.namedWindow('image')
 
 
-img = cv2.imread('image.jpg')
-
+img = cv.imread('Cores2.png') 
+b,g,r = cv.split(img) # Separa em 3 arrays
+cv.namedWindow('image')
 
 # create trackbars for color change
 cv.createTrackbar('R','image',0,255,nothing)
@@ -30,12 +33,14 @@ while(1):
         break
 
     # get current positions of four trackbars
-    r = cv.getTrackbarPos('R','image')
-    g = cv.getTrackbarPos('G','image')
-    b = cv.getTrackbarPos('B','image')
+    rTracked = cv.getTrackbarPos('R','image')
+    gTracked = cv.getTrackbarPos('G','image')
+    bTracked = cv.getTrackbarPos('B','image')
     s = cv.getTrackbarPos(switch,'image')
     if s == 0:
-        img[:] = 0
+        img
     else:
-        img[:] = [b,g,r]
+		r[:] = rTracked
+        #img[:] = [bTracked,gTracked,rTracked]
+        img = cv.merge([b,g,r])
 cv.destroyAllWindows()
