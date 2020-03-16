@@ -3,7 +3,7 @@ import numpy as np
 cap = cv.VideoCapture(0)
 while(1):
     # Take each frame
-    _, frame = cap.read()
+    ret, frame = cap.read()
     
     bri = cv.add(frame,np.array([90.0]))
     
