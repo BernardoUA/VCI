@@ -1,14 +1,19 @@
-import cv2 as cv
 import numpy as np
+import cv2 as cv 
+
 cap = cv.VideoCapture(0)
-while(1):
-    # Take each frame
+
+while cap.isOpened():
+    # Capture frame-by-frame
     ret, frame = cap.read()
     
-    bri = cv.add(frame,np.array([90.0]))
-    
-    cv.imshow('frame',bri)
-    k = cv.waitKey(5) & 0xFF
-    if k == 27:
+    # Change the brightness modify the number
+    bri = cv.add(frame,np.array([170.0]))
+   
+    # Display the resulting bri
+    cv.imshow('frame', bri)
+    if cv.waitKey(25) == ord('q'):
         break
+# When everything done, release the capture
+cap.release()
 cv.destroyAllWindows()
