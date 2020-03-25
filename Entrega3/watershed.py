@@ -35,8 +35,7 @@ img[markers == -1] = [255,0,0]
 plt.subplot(321);plt.imshow(img) # expects distorted color
 plt.subplot(322);plt.imshow(thresh) # expect true color
 plt.subplot(323);plt.imshow(dist_transform) # expects distorted color
-plt.subplot(324);plt.imshow(sure_bg) # expect true color
-plt.subplot(325);plt.imshow() # expects distorted color
+plt.subplot(324);plt.imshow(unknown) # expect true color
 plt.show()
 
 cv2.imshow('bgr image',opening) # expects true color
