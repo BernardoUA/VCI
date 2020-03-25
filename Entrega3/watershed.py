@@ -32,10 +32,10 @@ markers[unknown==255] = 0
 markers = cv2.watershed(img,markers)
 img[markers == -1] = [255,0,0]
 
-plt.subplot(321);plt.imshow(img) # expects distorted color
-plt.subplot(322);plt.imshow(thresh) # expect true color
-plt.subplot(323);plt.imshow(dist_transform) # expects distorted color
-plt.subplot(324);plt.imshow(unknown) # expect true color
+plt.subplot(221);plt.imshow(img) # expects distorted color
+plt.subplot(222);plt.imshow(thresh) # expect true color
+plt.subplot(223);plt.imshow(dist_transform) # expects distorted color
+plt.subplot(224);plt.imshow(unknown) # expect true color
 plt.show()
 
 cv2.imshow('bgr image',opening) # expects true color
