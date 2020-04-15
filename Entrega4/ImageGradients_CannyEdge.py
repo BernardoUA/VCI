@@ -14,7 +14,7 @@ def resize(image,scl):
     return image_resized
 
 def tracking_realtime_img_grad():
-    cap = cv2.VideoCapture('cambada_video.mp4')
+    cap = cv2.VideoCapture('cambada.mp4')
     cv2.namedWindow('Original vs Filtered')
 
     switch = '(1)tracking_all  (2)tracking_ball (3)tracking_blue_team (4)tracking_orange_team (5)tracking_lines'
@@ -248,8 +248,8 @@ def canny_edge_pic():
 
     cv2.waitKey()
 
-#tracking_realtime_img_grad()
-tracking_realtime_canny()
+tracking_realtime_img_grad()
+#tracking_realtime_canny()
 #image_gradients_first()
 #image_gradients_second()
 #canny_edge()
