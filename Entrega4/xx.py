@@ -5,12 +5,19 @@ import cv2
 import numpy as np
 from matplotlib import pyplot as plt
 
+def resize(img,size):
+    w_img = int(img.shape[1] * size / 75)
+    h_img = int(img.shape[0] * size / 75)
+    size_img = (w_img,h_img)
+    img_resized = cv2.resize(img, size_img, interpolation = cv2.INTER_AREA)
+    return img_resized
+
 def main():
-    capture = cv2.VideoCapture(0)
-    
+    capture = cv2.VideoCapture('cambada.mp4')
+
     if capture.isOpened() is False:
         raise("IO Error")
-        
+
     # setting
     capture.set(cv2.CAP_PROP_FPS, 12)
     capture.set(cv2.CAP_PROP_FRAME_WIDTH,  960)
@@ -27,23 +34,23 @@ def main():
 
     while True:
         ret, image = capture.read()
-
+        image = resize(image,40)
         if ret == False:
             continue
-        
+
         # filter
         img = cv2.GaussianBlur(image, (5, 5), 0)
         cimg = cv2.cvtColor(image, cv2.COLOR_RGB2GRAY)
-        
+
         dimg = cv2.medianBlur(img, 5)
         ret, dimg = cv2.threshold(dimg, 10, 255, cv2.THRESH_TOZERO)
         dimg = cv2.equalizeHist(cimg)
-        
+
         # detect circles
         circles = cv2.HoughCircles(dimg, cv2.HOUGH_GRADIENT, dp=1, minDist=30,
             param1=32, param2=40, minRadius=20, maxRadius=50)
-        
-        image_cercle = np.uint16(np.around(circles)) 
+
+        image_cercle = np.uint16(np.around(circles))
         for pt in image_cercle[0,0:2]:
 
 		#centre_x,centre_y,rayon=pt[0],pt[1],pt[2]
@@ -59,11 +66,11 @@ def main():
                 break
             if keyCode == 32:  # space
                 idx = (idx + 1) % 2
-        
+
         # show image
         image = [image, dimg][idx]
         cv2.imshow("Capture", image)
 
-    cv2.destroyAllWindows() 
+    cv2.destroyAllWindows()
 
 main()
