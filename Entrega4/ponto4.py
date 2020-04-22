@@ -5,13 +5,12 @@ img = cv2.imread('2.png',0)
 gray_img = cv2.cvtColor(img,cv2.COLOR_GRAY2BGR)	# Convert to gray-scale
 lower_red=np.array([169,100,100])
 upper_red=np.array([189,255,255])
-
 mask=cv2.inRange(gray_img,lower_red,upper_red)
+
 blured = cv2.medianBlur(img,3)					# Blur the image to reduce noise
 
 
-circles = cv2.HoughCircles(blured,cv2.HOUGH_GRADIENT,1	, img.shape[0]/64,
-                            param1=300,param2=40,minRadius=0,maxRadius=0)  # image, dp, minDistance, minRadious and maxRadious
+circles = cv2.HoughCircles(blured,cv2.HOUGH_GRADIENT,1,img.shape[0]/64,param1=300,param2=40,minRadius=0,maxRadius=0)  # image, dp, minDistance, minRadious and maxRadious
 
 while True:
 
