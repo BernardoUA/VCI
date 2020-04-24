@@ -34,28 +34,28 @@ def main():
 
     while True:
         ret, image = capture.read()
-        image = resize(image,40)
+        image = resize(image,30)
         if ret == False:
             continue
 
         # filter
-        img = cv2.GaussianBlur(image, (5, 5), 0)
+        img = cv2.GaussianBlur(image, (15, 15), 15)
         cimg = cv2.cvtColor(image, cv2.COLOR_RGB2GRAY)
 
-        dimg = cv2.medianBlur(img, 5)
-        ret, dimg = cv2.threshold(dimg, 10, 255, cv2.THRESH_TOZERO)
+        #dimg = cv2.medianBlur(img, 5)
+        #ret, dimg = cv2.threshold(dimg, 10, 255, cv2.THRESH_TOZERO)
         dimg = cv2.equalizeHist(cimg)
-
         # detect circles
-        circles = cv2.HoughCircles(dimg, cv2.HOUGH_GRADIENT, dp=1, minDist=30,
-            param1=32, param2=40, minRadius=20, maxRadius=50)
-
-        image_cercle = np.uint16(np.around(circles))
-        for pt in image_cercle[0,0:2]:
-
-		#centre_x,centre_y,rayon=pt[0],pt[1],pt[2]
-		cv2.circle(cimg,(pt[0],pt[1]),pt[2],(0,255,255),4)
-		cv2.circle(cimg,(pt[0],pt[1]),1,(255,0,0),3)
+        circles = cv2.HoughCircles(dimg,cv2.HOUGH_GRADIENT, dp=1, minDist=dimg.shape[0]/64,
+            param1=300, param2=30, minRadius=10, maxRadius=30)
+        if circles is None:
+            cv2.imshow("preview", frame)
+            continue
+        print circles
+        #image_cercle = np.uint16(np.around(circles))
+        for pt in circles[0,:]:
+            cv2.circle(cimg,(pt[0],pt[1]),pt[2],(0,255,255),2)
+            cv2.circle(cimg,(pt[0],pt[1]),1,(255,0,0),1)
 		# show image
         cv2.imshow('color image', cimg)
         keyCode = cv2.waitKey(33)
@@ -64,8 +64,8 @@ def main():
             if keyCode == 27:  # Esc
                 cv2.imwrite("image.png", image)
                 break
-            if keyCode == 32:  # space
-                idx = (idx + 1) % 2
+            #if keyCode == 32:  # space
+            #    idx = (idx + 1) % 2
 
         # show image
         image = [image, dimg][idx]
