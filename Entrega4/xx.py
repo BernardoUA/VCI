@@ -13,7 +13,7 @@ def resize(img,size):
     return img_resized
 
 def main():
-    capture = cv2.VideoCapture('cambada.mp4')
+    capture = cv2.VideoCapture('cambada1.mov')
 
     if capture.isOpened() is False:
         raise("IO Error")
@@ -49,7 +49,7 @@ def main():
         circles = cv2.HoughCircles(dimg,cv2.HOUGH_GRADIENT, dp=1, minDist=dimg.shape[0]/64,
             param1=300, param2=30, minRadius=10, maxRadius=30)
         if circles is None:
-            cv2.imshow("preview", frame)
+            #cv2.imshow("preview", frame)
             continue
         print circles
         #image_cercle = np.uint16(np.around(circles))
