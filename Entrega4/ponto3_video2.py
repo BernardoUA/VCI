@@ -9,7 +9,7 @@ def resize(img,size):
     img_resized = cv.resize(img, size_img, interpolation = cv.INTER_AREA)
     return img_resized
 
-cap = cv.VideoCapture('cambada.mp4')
+cap = cv.VideoCapture('cambada1.mov')
 
 while(True):
 	ret, frame = cap.read()
