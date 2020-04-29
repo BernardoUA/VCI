@@ -17,9 +17,11 @@ while(True):
 
 	framegray = cv.cvtColor(frame, cv.COLOR_BGR2GRAY)
 	cv.imshow('Original Frame',frame)						# show original frame
-	edges = cv.Canny(framegray,100,180)						# Second and third arguments are our minVal and maxVal respectively ( Sobel kernel used for find image gradient)
+	edges = cv.Canny(framegray,200,180)						# Second and third arguments are our minVal and maxVal respectively ( Sobel kernel used for find image gradient)
 	contours, hierarchy = cv.findContours(edges, cv.RETR_TREE, cv.CHAIN_APPROX_SIMPLE)
 	cv.drawContours(frame, contours, -1, (0,255,0), 2)
+	#cnt = contours[255]
+	#cv.drawContours(frame, [cnt], -1, (0,255,222), 3)
 	cv.imshow('Frame with contours', frame)
 
 	if(cv.waitKey(1) & 0xFF == ord('q')):
