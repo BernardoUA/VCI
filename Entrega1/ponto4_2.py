@@ -1,7 +1,4 @@
-"""
-@file copy_make_border.py
-@brief Sample code that shows the functionality of copyMakeBorder
-"""
+
 import sys
 from random import randint
 import cv2 as cv
