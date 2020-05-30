@@ -2,6 +2,13 @@ from __future__ import print_function
 import cv2 as cv
 import argparse
 
+def resize(img,size):
+    w_img = int(img.shape[1] * size / 75)
+    h_img = int(img.shape[0] * size / 75)
+    size_img = (w_img,h_img)
+    img_resized = cv.resize(img, size_img, interpolation = cv.INTER_AREA)
+    return img_resized
+
 parser = argparse.ArgumentParser(description='This program shows how to use background subtraction methods provided by \
                                               OpenCV. You can process both videos and images.')
 parser.add_argument('--input', type=str, help='Path to a video or a sequence of image.', default='cambada.mp4')
@@ -27,6 +34,7 @@ while True:
     ret, frame = capture.read()
     if frame is None:
         break
+    frame = resize(frame,40)
 
     ## [apply]
     #update the background model
