@@ -9,7 +9,7 @@ gaussian = np.random.normal(mean, sigma, (224, 224))
 
 
 
-for image in glob.glob('Cores2.jpg'):
+for image in glob.glob('Cores.jpg'):
     img = cv2.imread(image)
     noisy_image = np.zeros(img.shape, np.float32)
 
